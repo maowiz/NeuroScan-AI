@@ -100,7 +100,9 @@ function App() {
       imageData.push(images[i].base64_file);
     }
     const data = { image: imageData };
-    const res = await axios.post("https://maowi-neuroscan-api.hf.space/predict", data).catch((err) => {
+    const res = await axios.post("https://maowi-neuroscan-api.hf.space/predict", data, {
+      timeout: 120000 // 120 seconds for slow HuggingFace Space
+    }).catch((err) => {
       console.log(err);
       setLoading(false);
       alert('Error connecting to server. Please ensure the backend is running on port 5000.');
